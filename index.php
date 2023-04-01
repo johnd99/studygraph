@@ -10,3 +10,7 @@
         <!--<script src="number.js"></script>-->
     </body>
 </html>
+
+<?php
+    header('Location: slide.html');
+?>
