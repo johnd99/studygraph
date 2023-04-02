@@ -8,7 +8,7 @@
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-        $sql = "SELECT body FROM slide WHERE id = 1";
+        $sql = "SELECT title, body FROM slide WHERE id = 1";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
     

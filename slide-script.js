@@ -3,7 +3,9 @@
         const response = await fetch('slide-retrieve.php');
         if (response.ok) {
             const data = await response.json();
-            const body = data[0].body;
+            const title = data[0]['title'];
+            const body = data[0]['body'];
+            document.getElementById('title').innerHTML = title;
             document.getElementById('body').innerHTML = body;
         } else {
             console.error(`Error fetching data: ${response.status} ${response.statusText}`);
@@ -15,8 +17,9 @@
 
 document.getElementById('slide-form').addEventListener('submit', async (event) => {
     event.preventDefault();
+    const title = document.getElementById('title').value;
     const body = document.getElementById('body').value;
-    if (body === '') {
+    if (title === '' || body === '') {
         alert('Please fill in all fields');
         return;
     }
