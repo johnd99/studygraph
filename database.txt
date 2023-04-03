@@ -4,6 +4,7 @@ CREATE TABLE slide (
     id INTEGER AUTO_INCREMENT NOT NULL,
     title VARCHAR(50),
     body VARCHAR(1000),
+    last_saved VARCHAR(20),
     PRIMARY KEY (id)
 );
 

@@ -2,6 +2,7 @@
 
     $title = $_POST['title'];
     $body = $_POST['body'];
+    $last_saved = $_POST['lastSaved'];
 
     $servername = "localhost";
     $username = "root";
@@ -12,7 +13,7 @@
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-        $sql = "UPDATE slide SET title = \"$title\", body = \"$body\" WHERE id = 1";
+        $sql = "UPDATE slide SET title = \"$title\", body = \"$body\", last_saved = \"$last_saved\" WHERE id = 1";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
     } catch(PDOException $e) {
