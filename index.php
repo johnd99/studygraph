@@ -12,5 +12,5 @@
 </html>
 
 <?php
-    header('Location: slide.html');
+    header('Location: page.html');
 ?>

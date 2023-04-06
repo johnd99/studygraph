@@ -1,6 +1,6 @@
 CREATE DATABASE studygraph;
 
-CREATE TABLE slide (
+CREATE TABLE page (
     id INTEGER AUTO_INCREMENT NOT NULL,
     title VARCHAR(50),
     body VARCHAR(1000),
@@ -8,5 +8,5 @@ CREATE TABLE slide (
     PRIMARY KEY (id)
 );
 
-INSERT INTO slide (title, body)
+INSERT INTO page (title, body)
 VALUES  ('title', 'body');
