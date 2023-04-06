@@ -12,5 +12,5 @@
 </html>
 
 <?php
-    header('Location: page.html');
+    header('Location: graph.html');
 ?>
