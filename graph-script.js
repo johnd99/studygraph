@@ -7,8 +7,8 @@
                 let id = data[i]['id'];
                 let title = data[i]['title'];
                 let button = document.createElement('button');
-                button.textContent = title
-                button.addEventListener('click', () => getPage(id, title));
+                button.textContent = title;
+                button.addEventListener('click', () => getPage(id));
                 document.body.appendChild(button);
             }
         } else {
@@ -19,7 +19,6 @@
     }
 })();
 
-function getPage(id, title) {
-    alert(id);
-    alert(title);
+function getPage(id) {
+    window.location.href = `page.html?id=${encodeURIComponent(id)}`;
 }

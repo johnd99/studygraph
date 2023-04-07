@@ -1,6 +1,13 @@
 (async () => {
+    const id = new URLSearchParams(window.location.search).get('id');
     try {
-        const response = await fetch('page-retrieve.php');
+        const response = await fetch('page-retrieve.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `id=${id}`
+        });
         if (response.ok) {
             const data = await response.json();
             const title = data[0]['title'];
@@ -31,6 +38,8 @@ document.getElementById('page-form').addEventListener('submit', async (event) =>
         const formData = new FormData(event.target);
         const lastSaved = new Date().toLocaleString();
         formData.append('lastSaved', lastSaved);
+        const id = new URLSearchParams(window.location.search).get('id');
+        formData.append('id', id);
         const response = await fetch('page-update.php', {
             method: 'POST',
             body: formData

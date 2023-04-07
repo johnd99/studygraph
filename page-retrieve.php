@@ -1,4 +1,7 @@
 <?php
+
+    $id = $_POST['id'];
+
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -8,7 +11,7 @@
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-        $sql = "SELECT title, body, last_saved FROM page WHERE id = 1";
+        $sql = "SELECT title, body, last_saved FROM page WHERE id = $id";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
     
