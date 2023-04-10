@@ -2,6 +2,21 @@
     position: absolute;
 }
 
+#changePosition {
+    left: 200px;
+    top: 600px;
+}
+
+#editLines {
+    left: 400px;
+    top: 600px;
+}
+
+#goToPage {
+    left: 600px;
+    top: 600px;
+}
+
 button.highlighted {
     background-color: #4CAF50;
     color: white;

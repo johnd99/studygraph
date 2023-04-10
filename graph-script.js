@@ -15,9 +15,8 @@ let connections = [
 
 let buttons = [];
 
+let mode = 0;
 let prevClick = -2;
-let xPrev;
-let yPrev;
 
 let canvas;
 let ctx;
@@ -72,9 +71,57 @@ document.addEventListener("click", (event) => {
 });
 
 
+let positionButton = document.getElementById("changePosition");
+positionButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    changeMode(1);
+});
+
+let linesButton = document.getElementById("editLines");
+linesButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    changeMode(2);
+});
+
+let pageButton = document.getElementById("goToPage");
+pageButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    changeMode(3);
+});
+
+
+function changeMode(newMode) {
+    console.log(newMode);
+    if (prevClick >= 0) {
+        buttons[prevClick].classList.toggle("highlighted");
+    }
+    prevClick = -2;
+    positionButton.classList.remove("highlighted");
+    linesButton.classList.remove("highlighted");
+    pageButton.classList.remove("highlighted");
+    if (newMode === mode) {
+        mode = 0;
+    } else if (newMode === 1) {
+        positionButton.classList.add("highlighted");
+        mode = 1;
+    } else if (newMode === 2) {
+        linesButton.classList.add("highlighted");
+        mode = 2;
+    } else {
+        pageButton.classList.add("highlighted");
+        mode = 3;
+    }
+}
+
+
 function eventHandler(newClick, x, y) {
-    //movePages(newClick, x, y);
-    editConnections(newClick);
+    if (mode === 1) {
+        movePages(newClick, x, y);
+    } else if (mode === 2) {
+        editConnections(newClick);
+    } else if (mode === 3) {
+        goToPage(newClick);
+    }
 }
 
 function editConnections(newClick) {
@@ -119,6 +166,12 @@ function movePages(newClick, x, y) {
             prevClick = newClick;
         }
     }
+}
+
+
+function goToPage(newClick) {
+    let id = buttons[newClick].id;
+    window.location.href = `page.html?id=${encodeURIComponent(id)}`;
 }
 
 
