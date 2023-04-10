@@ -1,0 +1,10 @@
+body {
+    background-color: rgb(20, 20, 20);
+    color: rgb(200, 200, 200);
+}
+
+textarea, input, button {
+    background-color: rgb(40, 40, 40);
+    color: rgb(200, 200, 200);
+    border: 1px solid rgb(200, 200, 200);
+  }

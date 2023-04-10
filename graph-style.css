@@ -1,0 +1,12 @@
+.button {
+    position: absolute;
+}
+
+button.highlighted {
+    background-color: #4CAF50;
+    color: white;
+}
+
+canvas {
+    display: block;
+}
