@@ -1,19 +1,19 @@
 
 let numPages;
 
-let locations = [
-    [20, 20],
-    [40, 100],
-    [60, 180]
-];
+let locations = {
+    1: [20, 20],
+    2: [40, 100],
+    3: [60, 180]
+}
 
-let connections = [
-    [false, true, false],
-    [false, false, true],
-    [false, false, false]
-]
 
-let buttons = [];
+let connections = {
+    1: new Set().add(2),
+    2: new Set().add(3)
+}
+
+let buttons = {};
 
 let mode = 0;
 let prevClick = -2;
@@ -31,7 +31,7 @@ let ctx;
             for (let i = 0; i < numPages; i++) {
                 let id = data[i]['id'];
                 let title = data[i]['title'];
-                createButton(id, title, i);
+                createButton(id, title);
             }
             canvas = document.getElementById("drawingCanvas");
             canvas.width = window.innerWidth;
@@ -47,21 +47,20 @@ let ctx;
 })();
 
 
-function createButton(id, title, index) {
+function createButton(id, title) {
     let button = document.createElement('button');
-    button.id = id;
     button.textContent = title;
     button.classList.add("button");
-    let x = locations[index][0];
-    let y = locations[index][1];
+    let x = locations[id][0];
+    let y = locations[id][1];
     button.style.left = `${x}px`;
     button.style.top = `${y}px`;
     button.addEventListener("click", (event) => {
         event.stopPropagation(); // Prevent triggering the document click event
-        eventHandler(index, x, y);
+        eventHandler(id, x, y);
     });
     document.body.appendChild(button);
-    buttons.push(button);
+    buttons[id] = button;
 }
 
 document.addEventListener("click", (event) => {
@@ -91,7 +90,6 @@ pageButton.addEventListener('click', (event) => {
 
 
 function changeMode(newMode) {
-    console.log(newMode);
     if (prevClick >= 0) {
         buttons[prevClick].classList.toggle("highlighted");
     }
@@ -129,9 +127,13 @@ function editConnections(newClick) {
         if (prevClick === newClick) {
             prevClick = -2;
         } else if (prevClick >= 0) {
-            const min = Math.min(prevClick, newClick);
-            const max = Math.max(prevClick, newClick);
-            connections[min][max] = !connections[min][max];
+            const start = Math.min(prevClick, newClick);
+            const end = Math.max(prevClick, newClick);
+            if (connections[start].has(end)) {
+                connections[start].delete(end);
+            } else {
+                connections[start].add(end);
+            }
             drawLines();
             prevClick = -2;
         } else {
@@ -170,27 +172,25 @@ function movePages(newClick, x, y) {
 
 
 function goToPage(newClick) {
-    let id = buttons[newClick].id;
+    id = newClick;
     window.location.href = `page.html?id=${encodeURIComponent(id)}`;
 }
 
 
 function drawLines() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < numPages; i++) {
-        for (let j = 0; j < numPages; j++) {
-            if (connections[i][j]) {
-                const button1 = buttons[i];
-                const button2 = buttons[j];
-                const x1 = button1.offsetLeft;
-                const y1 = button1.offsetTop;
-                const x2 = button2.offsetLeft;
-                const y2 = button2.offsetTop;
-                ctx.beginPath();
-                ctx.moveTo(x1, y1);
-                ctx.lineTo(x2, y2);
-                ctx.stroke();
-            }
+    for (let start in connections) {
+        for (let end of connections[start]) {
+            const button1 = buttons[start];
+            const button2 = buttons[end];
+            const x1 = button1.offsetLeft;
+            const y1 = button1.offsetTop;
+            const x2 = button2.offsetLeft;
+            const y2 = button2.offsetTop;
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
         }
     }
 }
