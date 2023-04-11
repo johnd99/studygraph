@@ -5,6 +5,9 @@ CREATE TABLE page (
     title VARCHAR(50) DEFAULT '(unnamed)',
     body VARCHAR(1000),
     last_saved VARCHAR(20),
+    xPosition INTEGER,
+    yPosition INTEGER,
+    connections VARCHAR(20),
     PRIMARY KEY (id)
 );
 

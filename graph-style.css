@@ -17,6 +17,11 @@
     top: 600px;
 }
 
+#saveGraph {
+    left: 800px;
+    top: 600px;
+}
+
 button.highlighted {
     background-color: #4CAF50;
     color: white;
@@ -24,4 +29,15 @@ button.highlighted {
 
 canvas {
     display: block;
+}
+
+body {
+    background-color: rgb(35, 35, 35);
+    color: rgb(200, 200, 200);
+}
+
+button {
+    background-color: rgb(60, 60, 80);
+    color: rgb(200, 200, 200);
+    border: 1px solid rgb(200, 200, 200);
 }

@@ -1,22 +1,18 @@
 
 let numPages;
-
-let locations = {
-    1: [20, 20],
-    2: [40, 100],
-    3: [60, 180]
-}
-
-
-let connections = {
-    1: new Set().add(2),
-    2: new Set().add(3)
-}
-
+let locations = {}
+let connections = {}
 let buttons = {};
 
+const defaultLocations = [
+    [650, 650],
+    [750, 650],
+    [850, 650]
+]
+let curIndex = 0;
+
 let mode = 0;
-let prevClick = -2;
+let prevClick = -1;
 
 let canvas;
 let ctx;
@@ -29,14 +25,28 @@ let ctx;
             const data = await response.json();
             numPages = data.length;
             for (let i = 0; i < numPages; i++) {
-                let id = data[i]['id'];
-                let title = data[i]['title'];
+                const id = data[i]['id'];
+                const title = data[i]['title'];
+                const xPosition = data[i]['xPosition'];
+                const yPosition = data[i]['yPosition'];
+                const group = data[i]['connections'];
+                if (xPosition === null) {
+                    locations[id] = defaultLocations[curIndex];
+                } else {
+                    locations[id] = [xPosition, yPosition];
+                }
+                if (group === '') {
+                    connections[id] = [];
+                } else {
+                    connections[id] = group.split(", ").map(Number);
+                }
                 createButton(id, title);
             }
             canvas = document.getElementById("drawingCanvas");
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             ctx = canvas.getContext("2d");
+            ctx.strokeStyle = 'white';
             drawLines();
         } else {
             console.error(`Error fetching data: ${response.status} ${response.statusText}`);
@@ -66,7 +76,7 @@ function createButton(id, title) {
 document.addEventListener("click", (event) => {
     const x = event.clientX;
     const y = event.clientY;
-    eventHandler(-1, x, y);
+    eventHandler(0, x, y);
 });
 
 
@@ -88,12 +98,37 @@ pageButton.addEventListener('click', (event) => {
     changeMode(3);
 });
 
+let saveButton = document.getElementById("saveGraph");
+saveButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    updateGraph();
+});
+
+
+async function updateGraph() {
+    const response = await fetch("graph-update.php", {
+        method: "POST",
+        body: JSON.stringify({
+            "locations": locations,
+            "connections": connections
+        })
+    });
+
+    if (response.ok) {
+        alert("Saved Successfully");
+    } else {
+        console.error("Error sending data:", response.status, response.statusText);
+    }
+}
+
+
+
 
 function changeMode(newMode) {
-    if (prevClick >= 0) {
+    if (prevClick > 0) {
         buttons[prevClick].classList.toggle("highlighted");
     }
-    prevClick = -2;
+    prevClick = -1;
     positionButton.classList.remove("highlighted");
     linesButton.classList.remove("highlighted");
     pageButton.classList.remove("highlighted");
@@ -125,43 +160,44 @@ function eventHandler(newClick, x, y) {
 function editConnections(newClick) {
     if (newClick >= 0) {
         if (prevClick === newClick) {
-            prevClick = -2;
-        } else if (prevClick >= 0) {
+            prevClick = -1;
+        } else if (prevClick > 0) {
             const start = Math.min(prevClick, newClick);
             const end = Math.max(prevClick, newClick);
-            if (connections[start].has(end)) {
-                connections[start].delete(end);
+            const index = connections[start].indexOf(end);
+            if (index === -1) {
+                connections[start].push(end);
             } else {
-                connections[start].add(end);
+                connections[start].splice(index, 1);
             }
             drawLines();
-            prevClick = -2;
+            prevClick = -1;
         } else {
             prevClick = newClick;
         }
     } else {
-        prevClick = -2;
+        prevClick = -1;
     }
 }
 
 function movePages(newClick, x, y) {
-    if (newClick === -1) {
-        if (prevClick >= 0) {
+    if (newClick === 0) {
+        if (prevClick > 0) {
             const prevButton = buttons[prevClick];
             prevButton.classList.toggle("highlighted");
             prevButton.style.left = `${x}px`;
             prevButton.style.top = `${y}px`;
             drawLines();
             locations[prevClick] = [x, y];
-            prevClick = -2;
+            prevClick = -1;
         }
     } else {
         const button = buttons[newClick];
         button.classList.toggle("highlighted");
-        if (prevClick < 0) {
+        if (prevClick < 1) {
             prevClick = newClick;
         } else if (prevClick === newClick) {
-            prevClick = -2;
+            prevClick = -1;
         } else {
             const prevButton = buttons[prevClick];
             prevButton.classList.toggle("highlighted");
