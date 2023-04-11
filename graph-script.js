@@ -4,12 +4,7 @@ let locations = {}
 let connections = {}
 let buttons = {};
 
-const defaultLocations = [
-    [650, 650],
-    [750, 650],
-    [850, 650]
-]
-let curIndex = 0;
+const defaultLocation = [350, 550];
 
 let mode = 0;
 let prevClick = -1;
@@ -31,7 +26,7 @@ let ctx;
                 const yPosition = data[i]['yPosition'];
                 const group = data[i]['connections'];
                 if (xPosition === null) {
-                    locations[id] = defaultLocations[curIndex];
+                    locations[id] = defaultLocation;
                 } else {
                     locations[id] = [xPosition, yPosition];
                 }
@@ -104,6 +99,12 @@ saveButton.addEventListener('click', (event) => {
     updateGraph();
 });
 
+let createPageButton = document.getElementById("createPage");
+createPageButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    window.location.href = `page.html?id=${encodeURIComponent(-1)}`;
+});
+
 
 async function updateGraph() {
     const response = await fetch("graph-update.php", {
@@ -113,14 +114,12 @@ async function updateGraph() {
             "connections": connections
         })
     });
-
     if (response.ok) {
         alert("Saved Successfully");
     } else {
         console.error("Error sending data:", response.status, response.statusText);
     }
 }
-
 
 
 

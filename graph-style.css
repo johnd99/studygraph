@@ -3,22 +3,27 @@
 }
 
 #changePosition {
-    left: 200px;
+    left: 50px;
     top: 600px;
 }
 
 #editLines {
-    left: 400px;
+    left: 220px;
     top: 600px;
 }
 
 #goToPage {
-    left: 600px;
+    left: 350px;
     top: 600px;
 }
 
 #saveGraph {
-    left: 800px;
+    left: 500px;
+    top: 600px;
+}
+
+#createPage {
+    left: 650px;
     top: 600px;
 }
 

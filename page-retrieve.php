@@ -1,7 +1,5 @@
 <?php
 
-    $id = $_POST['id'];
-
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -10,8 +8,19 @@
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-        $sql = "SELECT title, body, last_saved FROM page WHERE id = $id";
+        
+        $id = $_POST['id'];
+        if ($id == -1) {
+            $sql1 = "INSERT INTO page VALUES ();";
+            $stmt1 = $conn->prepare($sql1);
+            $stmt1->execute();
+
+            $sql2 = "SELECT LAST_INSERT_ID();";
+            $stmt2 = $conn->prepare($sql2);
+            $stmt2->execute();
+            $id = $stmt2->fetch(PDO::FETCH_COLUMN);
+        }
+        $sql = "SELECT id, title, body FROM page WHERE id = $id";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
     
