@@ -25,6 +25,7 @@ let id;
     }
 })();
 
+
 document.getElementById('page-form').addEventListener('submit', async (event) => {
     event.preventDefault();
     const title = document.getElementById('title').value;
@@ -45,6 +46,26 @@ document.getElementById('page-form').addEventListener('submit', async (event) =>
             alert("Saved Successfully");
         } else {
             console.error(`Error submitting form: ${response.status} ${response.statusText}`);
+        }
+    } catch (error) {
+        console.error(`Error submitting form: ${error}`);
+    }
+});
+
+
+document.getElementById('delete-page').addEventListener('click', async () => {
+    try {
+        const formData = new FormData();
+        formData.append('id', id);
+        const response = await fetch('page-delete.php', {
+            method: 'POST',
+            body: formData
+        });
+        console.log(response.text());
+        if (response.ok) {
+            window.location.href = `graph.html`;
+        } else {
+            console.error(`Error fetching data: ${response.status} ${response.statusText}`);
         }
     } catch (error) {
         console.error(`Error submitting form: ${error}`);
