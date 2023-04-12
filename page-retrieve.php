@@ -20,11 +20,12 @@
             $stmt2->execute();
             $id = $stmt2->fetch(PDO::FETCH_COLUMN);
         }
-        $sql = "SELECT id, title, body FROM page WHERE id = $id";
+        $sql = "SELECT id, title, body, image_data FROM page WHERE id = $id";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
     
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $data[0]['image_data'] = base64_encode($data[0]['image_data']);
         echo json_encode($data);
         
     } catch(PDOException $e) {

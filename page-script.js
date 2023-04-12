@@ -17,6 +17,12 @@ let id;
             id = data[0]['id'];
             document.getElementById('title').innerHTML = title;
             document.getElementById('body').innerHTML = body;
+
+            if (data[0]['image_data']) {
+                const imgBase64 = data[0]['image_data'];
+                const displayedImage = document.getElementById('displayedImage');
+                displayedImage.src = `data:image/png;base64,${imgBase64}`;
+            }
         } else {
             console.error(`Error fetching data: ${response.status} ${response.statusText}`);
         }
@@ -69,5 +75,21 @@ document.getElementById('delete-page').addEventListener('click', async () => {
         }
     } catch (error) {
         console.error(`Error submitting form: ${error}`);
+    }
+});
+
+document.getElementById('uploadImageButton').addEventListener('click', () => {
+    document.getElementById('imageInput').click();
+});
+
+
+document.getElementById('imageInput').addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            document.getElementById('displayedImage').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
     }
 });
