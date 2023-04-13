@@ -1,3 +1,4 @@
+/*
 body {
     background-color: rgb(20, 20, 20);
     color: rgb(200, 200, 200);
@@ -8,3 +9,110 @@ textarea, input, button {
     color: rgb(200, 200, 200);
     border: 1px solid rgb(200, 200, 200);
   }
+*/
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General styles */
+body {
+    background-color: #202124;
+    color: #e8eaed;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* Form styles */
+#page-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+textarea {
+    background-color: #2b2e33;
+    color: #e8eaed;
+    border: 1px solid #5f6368;
+    border-radius: 4px;
+    padding: 0.5rem;
+    resize: vertical;
+    width: 100%;
+}
+
+#title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#body {
+    font-size: 1rem;
+}
+
+/* Image styles */
+#displayedImage {
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    display: block;
+    margin: 1rem auto;
+}
+
+/* Button styles */
+button, input[type="submit"] {
+    background-color: #3c4043;
+    color: #e8eaed;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #5f6368;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #5f6368;
+}
+
+/* Utility classes */
+.hidden {
+    display: none;
+}
+
+/* Layout */
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+/* Buttons container */
+.buttons-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Delete page button */
+#delete-page {
+    background-color: #3c4043;
+    border: 1px solid #5f6368;
+}
+
+#delete-page:hover {
+    background-color: #5f6368;
+}

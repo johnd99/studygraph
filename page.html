@@ -7,17 +7,19 @@
     </head>
     <body>
         <form id="page-form">
-            <textarea id="title" name="title" rows="1" cols="30"></textarea> <br> <br>
-            <textarea id="body" name="body" rows="4" cols="50"></textarea> <br> <br>
-            <button type="button" id="uploadImageButton">Upload Image</button> <br> <br>
-            <input type="file" id="imageInput" name="imageInput" accept="image/*" style="display: none;">
-            <img id="displayedImage" src="" alt="Selected image will be displayed here" style="max-width: 25%;"> <br> <br>
-            <input type="submit" value="Save"> <br> <br>
+            <textarea id="title" name="title" rows="1" cols="30"></textarea>
+            <textarea id="body" name="body" rows="4" cols="50"></textarea>
+            <img id="displayedImage" src="" alt="Selected image will be displayed here">
+            <div class="buttons-container">
+                <button type="button" id="uploadImageButton">Upload Image</button>
+                <input type="file" id="imageInput" name="imageInput" accept="image/*" style="display: none;">
+                <input type="submit" value="Save Page">
+                <button id="delete-page">Delete This Page</button>
+                <a href="graph.html">
+                    <button type="button" id="back-to-graph">Back to Graph</button>
+                </a>
+            </div>
         </form>
-        <a href="graph.html">
-            <button id="back-to-graph">Back to Graph</button> <br> <br>
-        </a>
-        <button id="delete-page">Delete This Page</button>
         <script src="page-script.js"></script>
     </body>
 </html>
