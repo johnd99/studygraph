@@ -39,7 +39,7 @@ let ctx;
             }
             canvas = document.getElementById("drawingCanvas");
             canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            canvas.height = window.innerHeight - 100;
             ctx = canvas.getContext("2d");
             ctx.strokeStyle = 'white';
             drawLines();
@@ -55,7 +55,7 @@ let ctx;
 function createButton(id, title) {
     let button = document.createElement('button');
     button.textContent = title;
-    button.classList.add("button");
+    button.classList.add("graphButton");
     let x = locations[id][0];
     let y = locations[id][1];
     button.style.left = `${x}px`;
@@ -69,8 +69,8 @@ function createButton(id, title) {
 }
 
 document.addEventListener("click", (event) => {
-    const x = event.clientX;
-    const y = event.clientY;
+    const x = event.pageX;
+    const y = event.pageY;
     eventHandler(0, x, y);
 });
 
@@ -97,11 +97,13 @@ let saveButton = document.getElementById("saveGraph");
 saveButton.addEventListener('click', (event) => {
     event.stopPropagation();
     updateGraph();
+    alert("Saved Successfully");
 });
 
 let createPageButton = document.getElementById("createPage");
 createPageButton.addEventListener('click', (event) => {
     event.stopPropagation();
+    updateGraph();
     window.location.href = `page.html?id=${encodeURIComponent(-1)}`;
 });
 
@@ -114,9 +116,7 @@ async function updateGraph() {
             "connections": connections
         })
     });
-    if (response.ok) {
-        alert("Saved Successfully");
-    } else {
+    if (!response.ok) {
         console.error("Error sending data:", response.status, response.statusText);
     }
 }
@@ -157,7 +157,7 @@ function eventHandler(newClick, x, y) {
 }
 
 function editConnections(newClick) {
-    if (newClick >= 0) {
+    if (newClick > 0) {
         if (prevClick === newClick) {
             prevClick = -1;
         } else if (prevClick > 0) {
@@ -207,6 +207,7 @@ function movePages(newClick, x, y) {
 
 
 function goToPage(newClick) {
+    updateGraph();
     id = newClick;
     window.location.href = `page.html?id=${encodeURIComponent(id)}`;
 }

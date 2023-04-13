@@ -1,48 +1,84 @@
-.button {
-    position: absolute;
+
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-#changePosition {
-    left: 50px;
-    top: 600px;
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures that the body takes up at least the full viewport height */
+    background-color: #202124;
+    color: #e8eaed;
+    font-family: Arial, sans-serif;
 }
 
-#editLines {
-    left: 220px;
-    top: 600px;
-}
-
-#goToPage {
-    left: 350px;
-    top: 600px;
-}
-
-#saveGraph {
-    left: 500px;
-    top: 600px;
-}
-
-#createPage {
-    left: 650px;
-    top: 600px;
-}
-
-button.highlighted {
-    background-color: #4CAF50;
-    color: white;
-}
 
 canvas {
     display: block;
 }
 
-body {
-    background-color: rgb(27, 28, 30);
-    color: rgb(200, 200, 200);
+/* Button styles */
+.button {
+    background-color: #3c4043;
+    color: #e8eaed;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #5f6368;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-button {
-    background-color: rgb(60, 60, 100);
-    color: rgb(200, 200, 200);
-    border: 1px solid rgb(200, 200, 200);
+.button:hover {
+    background-color: #5f6368;
 }
+
+
+.buttons-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    padding: 1rem;
+    flex-shrink: 0;
+}
+
+
+
+
+.graphButton {
+    background-color: #3d3d4f;
+    color: #e8eaed;
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid #5f6368;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    
+}
+
+
+.graphButton:hover {
+    background-color: #5f6368;
+}
+
+
+.button.highlighted {
+    background-color: #3d48bd;
+    color: white;
+}
+
+.graphButton.highlighted {
+    background-color: #5da55f;
+    color: white;
+}
+
+
