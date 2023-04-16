@@ -35,9 +35,8 @@ let id;
 document.getElementById('page-form').addEventListener('submit', async (event) => {
     event.preventDefault();
     const title = document.getElementById('title').value;
-    const body = document.getElementById('body').value;
-    if (title === '' || body === '') {
-        alert('Please fill in all fields');
+    if (title === '') {
+        alert('Please fill in title');
         return;
     }
 

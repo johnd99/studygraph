@@ -4,7 +4,7 @@ let locations = {}
 let connections = {}
 let buttons = {};
 
-const defaultLocation = [350, 550];
+const defaultLocation = [675, 500];
 
 let mode = 0;
 let prevClick = -1;
@@ -125,7 +125,7 @@ async function updateGraph() {
 
 function changeMode(newMode) {
     if (prevClick > 0) {
-        buttons[prevClick].classList.toggle("highlighted");
+        buttons[prevClick].classList.remove("highlighted");
     }
     prevClick = -1;
     positionButton.classList.remove("highlighted");

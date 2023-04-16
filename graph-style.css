@@ -50,7 +50,7 @@ canvas {
 
 
 
-
+/*
 .graphButton {
     background-color: #3d3d4f;
     color: #e8eaed;
@@ -62,9 +62,24 @@ canvas {
     transition: background-color 0.3s ease;
     position: absolute;
     transform: translate(-50%, -50%);
-    
 }
-
+*/
+.graphButton {
+    background-color: #505067;
+    color: #e8eaed;
+    font-size: 0.7rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid #9eb3c7;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 90px; /* Add a fixed width */
+    white-space: normal; /* Allow the text to wrap */
+    line-height: 1.2; /* Adjust line-height for better readability */
+    text-align: center; /* Center the text within the button */
+}
 
 .graphButton:hover {
     background-color: #5f6368;
