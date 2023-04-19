@@ -50,20 +50,6 @@ canvas {
 
 
 
-/*
-.graphButton {
-    background-color: #3d3d4f;
-    color: #e8eaed;
-    font-size: 1rem;
-    padding: 0.5rem 1.5rem;
-    border: 1px solid #5f6368;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    position: absolute;
-    transform: translate(-50%, -50%);
-}
-*/
 .graphButton {
     background-color: #505067;
     color: #e8eaed;

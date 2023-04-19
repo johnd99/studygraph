@@ -27,10 +27,7 @@
             $stmt = $conn->prepare($sql);
             $stmt->execute([$title, $body, $id]);
         }
-    
-        //$sql = "UPDATE page SET title = \"$title\", body = \"$body\" WHERE id = $id";
-        //$stmt = $conn->prepare($sql);
-        //$stmt->execute();
+        
     } catch(PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
