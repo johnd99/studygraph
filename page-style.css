@@ -13,13 +13,17 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/*
 a {
     text-decoration: none;
 }
+*/
 
+/*
 button {
     cursor: pointer;
 }
+*/
 
 /* Form styles */
 #page-form {
@@ -42,12 +46,12 @@ textarea {
     line-height: 1.5;
 }
 
-#title {
+#page-title {
     font-size: 1.5rem;
     font-weight: bold;
 }
 
-#body {
+#page-body {
     font-size: 1rem;
 }
 
@@ -61,6 +65,7 @@ textarea {
 }
 
 /* Button styles */
+
 button, input[type="submit"] {
     background-color: #3c4043;
     color: #e8eaed;
@@ -71,22 +76,29 @@ button, input[type="submit"] {
     transition: background-color 0.3s ease;
 }
 
+
 button:hover, input[type="submit"]:hover {
     background-color: #5f6368;
 }
 
+
+
 /* Utility classes */
+/*
 .hidden {
     display: none;
 }
+*/
 
 /* Layout */
+/*
 .container {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     padding: 2rem;
 }
+*/
 
 /* Buttons container */
 .buttons-container {
@@ -97,6 +109,7 @@ button:hover, input[type="submit"]:hover {
 }
 
 /* Delete page button */
+/*
 #delete-page {
     background-color: #3c4043;
     border: 1px solid #5f6368;
@@ -105,3 +118,4 @@ button:hover, input[type="submit"]:hover {
 #delete-page:hover {
     background-color: #5f6368;
 }
+*/

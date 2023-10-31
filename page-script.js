@@ -15,8 +15,8 @@ let id;
             const title = data[0]['title'];
             const body = data[0]['body'];
             id = data[0]['id'];
-            document.getElementById('title').innerHTML = title;
-            document.getElementById('body').innerHTML = body;
+            document.getElementById('page-title').innerHTML = title;
+            document.getElementById('page-body').innerHTML = body;
 
             if (data[0]['image_data']) {
                 const imgBase64 = data[0]['image_data'];
