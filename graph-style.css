@@ -13,7 +13,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Ensures that the body takes up at least the full viewport height */
-    background-color: #202124;
+    background-color: #1b1b1e;
     color: #e8eaed;
     font-family: Arial, sans-serif;
 }
@@ -25,7 +25,7 @@ canvas {
 
 /* Button styles */
 .button {
-    background-color: #3c4043;
+    background-color: #454e5b;
     color: #e8eaed;
     font-size: 1rem;
     padding: 0.5rem 1rem;
@@ -51,11 +51,11 @@ canvas {
 
 
 .graphButton {
-    background-color: #505067;
+    background-color: #45496b;
     color: #e8eaed;
     font-size: 0.7rem;
     padding: 0.4rem 1rem;
-    border: 1px solid #9eb3c7;
+    border: 1px solid #d6d6d6;
     border-radius: 40px;
     cursor: pointer;
     transition: background-color 0.3s ease;
