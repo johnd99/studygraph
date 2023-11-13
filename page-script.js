@@ -34,7 +34,7 @@ let id;
 
 document.getElementById('page-form').addEventListener('submit', async (event) => {
     event.preventDefault();
-    const title = document.getElementById('title').value;
+    const title = document.getElementById('page-title').value;
     if (title === '') {
         alert('Please fill in title');
         return;

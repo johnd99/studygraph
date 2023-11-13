@@ -2,8 +2,8 @@
 
     include 'dbconnection.php';
 
-    $title = $_POST['title'];
-    $body = $_POST['body'];
+    $title = $_POST['page-title'];
+    $body = $_POST['page-body'];
     $id = $_POST['id'];
 
     $imageData = null;
