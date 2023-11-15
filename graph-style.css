@@ -1,12 +1,4 @@
 
-
-/* Reset CSS */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
     margin: 0;
     padding: 0;
@@ -23,7 +15,7 @@ canvas {
     display: block;
 }
 
-/* Button styles */
+
 .button {
     background-color: #454e5b;
     color: #e8eaed;
@@ -64,7 +56,7 @@ canvas {
     width: 90px; /* Add a fixed width */
     white-space: normal; /* Allow the text to wrap */
     line-height: 1.2; /* Adjust line-height for better readability */
-    text-align: center; /* Center the text within the button */
+    text-align: center;
 }
 
 .graphButton:hover {

@@ -180,16 +180,14 @@ function editConnections(newClick) {
 }
 
 function movePages(newClick, x, y) {
-    if (newClick === 0) {
-        if (prevClick > 0) {
-            const prevButton = buttons[prevClick];
-            prevButton.classList.toggle("highlighted");
-            prevButton.style.left = `${x}px`;
-            prevButton.style.top = `${y}px`;
-            drawLines();
-            locations[prevClick] = [x, y];
-            prevClick = -1;
-        }
+    if (newClick === 0 && prevClick > 0) {
+        const prevButton = buttons[prevClick];
+        prevButton.classList.toggle("highlighted");
+        prevButton.style.left = `${x}px`;
+        prevButton.style.top = `${y}px`;
+        drawLines();
+        locations[prevClick] = [x, y];
+        prevClick = -1;
     } else {
         const button = buttons[newClick];
         button.classList.toggle("highlighted");

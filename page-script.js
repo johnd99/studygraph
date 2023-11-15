@@ -39,7 +39,6 @@ document.getElementById('page-form').addEventListener('submit', async (event) =>
         alert('Please fill in title');
         return;
     }
-
     try {
         const formData = new FormData(event.target);
         formData.append('id', id);
