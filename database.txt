@@ -1,15 +1,17 @@
 CREATE DATABASE studygraph;
 
+CREATE TABLE graph (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY
+);
+
 CREATE TABLE page (
-    id INTEGER AUTO_INCREMENT NOT NULL,
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(50) DEFAULT '(unnamed)',
     body VARCHAR(1000),
     image_data MEDIUMBLOB,
     xPosition INTEGER,
     yPosition INTEGER,
     connections VARCHAR(20),
-    PRIMARY KEY (id)
+    graph_id INTEGER,
+    FOREIGN KEY (graph_id) REFERENCES graph(id)
 );
-
-INSERT INTO page (title, body)
-VALUES  ('title', 'body');
