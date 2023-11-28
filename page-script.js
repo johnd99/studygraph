@@ -14,7 +14,6 @@ let id;
             const data = await response.json();
             const title = data[0]['title'];
             const body = data[0]['body'];
-            id = data[0]['id'];
             document.getElementById('page-title').innerHTML = title;
             document.getElementById('page-body').innerHTML = body;
 
