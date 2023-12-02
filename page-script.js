@@ -5,9 +5,6 @@ let id;
     try {
         const response = await fetch('page-retrieve.php', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
             body: `id=${id}`
         });
         if (response.ok) {
@@ -48,30 +45,27 @@ document.getElementById('page-form').addEventListener('submit', async (event) =>
         if (response.ok) {
             alert("Saved Successfully");
         } else {
-            console.error(`Error submitting form: ${response.status} ${response.statusText}`);
+            console.error(`Error saving page: ${response.status} ${response.statusText}`);
         }
     } catch (error) {
-        console.error(`Error submitting form: ${error}`);
+        console.error(`Error saving page: ${error}`);
     }
 });
 
 
 document.getElementById('delete-page').addEventListener('click', async () => {
     try {
-        const formData = new FormData();
-        formData.append('id', id);
         const response = await fetch('page-delete.php', {
             method: 'POST',
-            body: formData
+            body: `id=${id}`
         });
-        console.log(response.text());
         if (response.ok) {
             window.location.href = `graph.html`;
         } else {
-            console.error(`Error fetching data: ${response.status} ${response.statusText}`);
+            console.error(`Error deleting page: ${response.status} ${response.statusText}`);
         }
     } catch (error) {
-        console.error(`Error submitting form: ${error}`);
+        console.error(`Error deleting page: ${error}`);
     }
 });
 
