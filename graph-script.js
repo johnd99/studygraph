@@ -75,6 +75,7 @@ document.addEventListener("click", (event) => {
 });
 
 
+//Might need to ensure that DOM is loaded first
 let positionButton = document.getElementById("changePosition");
 positionButton.addEventListener('click', (event) => {
     event.stopPropagation();
@@ -103,8 +104,7 @@ saveButton.addEventListener('click', (event) => {
 let createPageButton = document.getElementById("createPage");
 createPageButton.addEventListener('click', (event) => {
     event.stopPropagation();
-    updateGraph();
-    window.location.href = `page.html?id=${encodeURIComponent(-1)}`;
+    createPage();
 });
 
 
@@ -204,9 +204,16 @@ function movePages(newClick, x, y) {
 }
 
 
+async function createPage() {
+    const response = await fetch("page-create.php");
+    const id = await response.text();
+    goToPage(id);
+}
+
+
 function goToPage(newClick) {
     updateGraph();
-    id = newClick;
+    const id = newClick;
     window.location.href = `page.html?id=${encodeURIComponent(id)}`;
 }
 
