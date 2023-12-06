@@ -44,7 +44,7 @@ let ctx;
             ctx.strokeStyle = 'white';
             drawLines();
         } else {
-            console.error(`Error fetching data: ${response.status} ${response.statusText}`);
+            console.error(`Error accessing data: ${response.status} ${response.statusText}`);
         }
     } catch (error) {
         console.error(`Error fetching data: ${error}`);

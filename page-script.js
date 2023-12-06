@@ -5,19 +5,20 @@ let id;
     try {
         const response = await fetch('page-retrieve.php', {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
             body: `id=${id}`
         });
         if (response.ok) {
-            const data = await response.json();
+            const data = await response.json();  //Switch data[0]?
             const title = data[0]['title'];
             const body = data[0]['body'];
+            const imageReference = data[0]['image_reference'];
             document.getElementById('page-title').innerHTML = title;
             document.getElementById('page-body').innerHTML = body;
-
-            if (data[0]['image_data']) {
-                const imgBase64 = data[0]['image_data'];
-                const displayedImage = document.getElementById('displayedImage');
-                displayedImage.src = `data:image/png;base64,${imgBase64}`;
+            if (imageReference) {
+                document.getElementById('displayedImage').src = imageReference;
             }
         } else {
             console.error(`Error fetching data: ${response.status} ${response.statusText}`);
@@ -43,6 +44,7 @@ document.getElementById('page-form').addEventListener('submit', async (event) =>
             body: formData
         });
         if (response.ok) {
+            console.log(response.text());
             alert("Saved Successfully");
         } else {
             console.error(`Error saving page: ${response.status} ${response.statusText}`);
