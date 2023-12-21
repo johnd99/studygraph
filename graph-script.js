@@ -128,55 +128,73 @@ async function updateGraph() {
 
 
 function stateHandler(newClick, x, y) {
-    if (firstClick === -1 && newClick < 6 && newClick !== 0) {
-        firstClick = newClick;
-        buttons[firstClick].classList.add("highlighted");
+    if (newClick < 6 && newClick !== 0) {
+        if (firstClick === -1) {
+            firstButtonActivate(true, newClick);
+        } else if (firstClick !== newClick) {
+            firstButtonActivate(false);
+            firstButtonActivate(true, newClick);
+        }
+        if (secondClick !== -1) {
+            secondButtonActivate(false);
+        }
     } else if (firstClick === 1) {
         if (secondClick === -1) {
-            if (newClick >= 6) {
-                secondClick = newClick;
-                buttons[secondClick].classList.add("highlighted");
+            if (newClick === 0) {
+                firstButtonActivate(false);
             } else {
-                buttons[firstClick].classList.remove("highlighted");
-                firstClick = -1;
+                secondButtonActivate(true, newClick);
             }
         } else if (newClick === 0) {
             movePages(secondClick, x, y);
-            undoHighlight(); 
+            secondButtonActivate(false);
         } else {
-            undoHighlight();
+            firstButtonActivate(false);
+            secondButtonActivate(false);
         }
     } else if (firstClick === 2) {
         if (secondClick === -1) {
-            if (newClick >= 6) {
-                secondClick = newClick;
-                buttons[secondClick].classList.add("highlighted");
+            if (newClick === 0) {
+                firstButtonActivate(false);
             } else {
-                buttons[firstClick].classList.remove("highlighted");
-                firstClick = -1;
+                secondButtonActivate(true, newClick);
             }
         } else if (newClick >= 6 && newClick !== secondClick) {
             editConnections(secondClick - 6, newClick - 6);
-            undoHighlight(); 
+            secondButtonActivate(false);
         } else {
-            undoHighlight();
+            firstButtonActivate(false);
+            secondButtonActivate(false);
         }
     } else if (firstClick === 3) {
         if (newClick >= 6) {
             goToPage(newClick - 6);
         } else {
-            buttons[firstClick].classList.remove("highlighted");
-            firstClick = -1;
+            firstButtonActivate(false);
         }
     }
 }
 
 
-function undoHighlight() {
-    buttons[firstClick].classList.remove("highlighted");
-    buttons[secondClick].classList.remove("highlighted");
-    firstClick = -1;
-    secondClick = -1;
+function firstButtonActivate(activate, newClick) {
+    if (activate) {
+        firstClick = newClick;
+        buttons[firstClick].classList.add("highlighted");
+    } else {
+        buttons[firstClick].classList.remove("highlighted");
+        firstClick = -1;
+    }
+}
+
+
+function secondButtonActivate(activate, newClick) {
+    if (activate) {
+        secondClick = newClick;
+        buttons[secondClick].classList.add("highlighted");
+    } else {
+        buttons[secondClick].classList.remove("highlighted");
+        secondClick = -1;
+    }
 }
 
 

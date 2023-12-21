@@ -8,7 +8,7 @@ CREATE TABLE page (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(50) DEFAULT '(unnamed)',
     body VARCHAR(1000),
-    image_data MEDIUMBLOB,
+    image_reference VARCHAR(255),
     xPosition INTEGER,
     yPosition INTEGER,
     connections VARCHAR(20),
