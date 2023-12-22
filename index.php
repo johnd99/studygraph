@@ -1,3 +1,3 @@
 <?php
-    header('Location: graph.html');
+    header('Location: project-selector.html');
 ?>

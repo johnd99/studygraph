@@ -1,10 +1,9 @@
 
-let numPages;
+const defaultLocation = [675, 500];
+
 let locations = {}
 let connections = {}
 let buttons = {};
-
-const defaultLocation = [675, 500];
 
 let firstClick = -1;
 let secondClick = -1;
@@ -14,12 +13,18 @@ let ctx;
 
 
 (async () => {
+    graph_id = new URLSearchParams(window.location.search).get('id');
     try {
-        const response = await fetch('graph-retrieve.php');
+        const response = await fetch('graph-retrieve.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `graph_id=${graph_id}`
+        });
         if (response.ok) {
             const data = await response.json();
-            numPages = data.length;
-            for (let i = 0; i < numPages; i++) {
+            for (let i = 0; i < data.length; i++) {
                 const id = data[i]['id'];
                 const title = data[i]['title'];
                 const xPosition = data[i]['xPosition'];
@@ -67,6 +72,7 @@ function createButton(id, title) {
     document.body.appendChild(button);
     buttons[id + 6] = button;
 }
+
 
 document.addEventListener("click", (event) => {
     const x = event.pageX;

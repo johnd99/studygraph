@@ -9,7 +9,6 @@
     $stmt->execute();
 
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //$data[0]['image_data'] = base64_encode($data[0]['image_data']);
     echo json_encode($data);
         
 ?>

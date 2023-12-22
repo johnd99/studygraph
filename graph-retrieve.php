@@ -2,7 +2,9 @@
     
     include 'dbconnection.php';
 
-    $sql = "SELECT id, title, xPosition, yPosition, connections FROM page ORDER BY id";
+    $graph_id = $_POST['graph_id'];
+
+    $sql = "SELECT id, title, xPosition, yPosition, connections FROM page WHERE graph_id = $graph_id";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
 
