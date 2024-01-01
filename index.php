@@ -1,3 +1,3 @@
 <?php
-    header('Location: project-selector.html');
+    header('Location: project-list.html');
 ?>
