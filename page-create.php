@@ -2,7 +2,9 @@
   
     include 'dbconnection.php';
 
-    $sql1 = "INSERT INTO page VALUES ();";
+    $graph_id = $_POST['graph_id'];
+
+    $sql1 = "INSERT INTO page (graph_id) VALUES ($graph_id);";
     $stmt1 = $conn->prepare($sql1);
     $stmt1->execute();
 

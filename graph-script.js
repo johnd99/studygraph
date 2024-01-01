@@ -1,6 +1,8 @@
 
 const defaultLocation = [675, 500];
 
+let graph_id;
+
 let locations = {}
 let connections = {}
 let buttons = {};
@@ -13,7 +15,7 @@ let ctx;
 
 
 (async () => {
-    graph_id = new URLSearchParams(window.location.search).get('id');
+    graph_id = new URLSearchParams(window.location.search).get('graph_id');
     try {
         const response = await fetch('graph-retrieve.php', {
             method: 'POST',
@@ -227,15 +229,26 @@ function movePages(newClick, x, y) {
 
 
 async function createPage() {
-    const response = await fetch("page-create.php");
-    const id = await response.text();
-    goToPage(id);
+    const response = await fetch('page-create.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `graph_id=${graph_id}`
+    });
+    if (response.ok) {
+        const page_id = await response.text();
+        goToPage(page_id);
+    } else {
+        console.error("Error creating page");
+    }
+    
 }
 
 
-function goToPage(id) {
+function goToPage(page_id) {
     updateGraph();
-    window.location.href = `page.html?id=${encodeURIComponent(id)}`;
+    window.location.href = `page.html?page_id=${encodeURIComponent(page_id)}&graph_id=${encodeURIComponent(graph_id)}`;
 }
 
 

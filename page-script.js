@@ -1,14 +1,16 @@
-let id;
+let page_id;
+let graph_id;
 
 (async () => {
-    id = new URLSearchParams(window.location.search).get('id');
+    page_id = new URLSearchParams(window.location.search).get('page_id');
+    graph_id = new URLSearchParams(window.location.search).get('graph_id');
     try {
         const response = await fetch('page-retrieve.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: `id=${id}`
+            body: `id=${page_id}`
         });
         if (response.ok) {
             const data = await response.json();  //Switch data[0]?
@@ -38,7 +40,7 @@ document.getElementById('page-form').addEventListener('submit', async (event) =>
     }
     try {
         const formData = new FormData(event.target);
-        formData.append('id', id);
+        formData.append('id', page_id);
         const response = await fetch('page-update.php', {
             method: 'POST',
             body: formData
@@ -59,7 +61,7 @@ document.getElementById('delete-page').addEventListener('click', async () => {
     try {
         const response = await fetch('page-delete.php', {
             method: 'POST',
-            body: `id=${id}`
+            body: `id=${page_id}`
         });
         if (response.ok) {
             window.location.href = `graph.html`;
@@ -85,4 +87,9 @@ document.getElementById('imageInput').addEventListener('change', (event) => {
         };
         reader.readAsDataURL(file);
     }
+});
+
+
+document.getElementById('back-to-graph').addEventListener('click', () => {
+    window.location.href = `graph.html?graph_id=${encodeURIComponent(graph_id)}`;
 });
