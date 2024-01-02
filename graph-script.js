@@ -69,10 +69,10 @@ function createButton(id, title) {
     button.style.top = `${y}px`;
     button.addEventListener("click", (event) => {
         event.stopPropagation(); // Prevent triggering the document click event
-        stateHandler(id + 6);
+        stateHandler(id + 7);
     });
     document.body.appendChild(button);
-    buttons[id + 6] = button;
+    buttons[id + 7] = button;
 }
 
 
@@ -105,20 +105,28 @@ pageButton.addEventListener('click', (event) => {
 });
 buttons[3] = pageButton;
 
+let createPageButton = document.getElementById("createPage");
+createPageButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    createPage();
+});
+buttons[4] = createPageButton;
+
 let saveButton = document.getElementById("saveGraph");
 saveButton.addEventListener('click', (event) => {
     event.stopPropagation();
     updateGraph();
     alert("Saved Successfully");
 });
-buttons[4] = saveButton;
+buttons[5] = saveButton;
 
-let createPageButton = document.getElementById("createPage");
-createPageButton.addEventListener('click', (event) => {
+let exitButton = document.getElementById("exitProject");
+exitButton.addEventListener('click', (event) => {
     event.stopPropagation();
-    createPage();
+    updateGraph();
+    window.location.href = `project-list.html`;
 });
-buttons[5] = createPageButton;
+buttons[6] = exitButton;
 
 
 async function updateGraph() {
@@ -136,7 +144,7 @@ async function updateGraph() {
 
 
 function stateHandler(newClick, x, y) {
-    if (newClick < 6 && newClick !== 0) {
+    if (newClick < 7 && newClick !== 0) {
         if (firstClick === -1) {
             firstButtonActivate(true, newClick);
         } else if (firstClick !== newClick) {
@@ -167,16 +175,16 @@ function stateHandler(newClick, x, y) {
             } else {
                 secondButtonActivate(true, newClick);
             }
-        } else if (newClick >= 6 && newClick !== secondClick) {
-            editConnections(secondClick - 6, newClick - 6);
+        } else if (newClick >= 7 && newClick !== secondClick) {
+            editConnections(secondClick - 7, newClick - 7);
             secondButtonActivate(false);
         } else {
             firstButtonActivate(false);
             secondButtonActivate(false);
         }
     } else if (firstClick === 3) {
-        if (newClick >= 6) {
-            goToPage(newClick - 6);
+        if (newClick >= 7) {
+            goToPage(newClick - 7);
         } else {
             firstButtonActivate(false);
         }
@@ -224,7 +232,7 @@ function movePages(newClick, x, y) {
     button.style.left = `${x}px`;
     button.style.top = `${y}px`;
     drawLines();
-    locations[newClick - 6] = [x, y];
+    locations[newClick - 7] = [x, y];
 }
 
 
@@ -257,8 +265,8 @@ function drawLines() {
     for (let start in connections) {
         start = parseInt(start);
         for (let end of connections[start]) {
-            const button1 = buttons[start + 6];
-            const button2 = buttons[end + 6];
+            const button1 = buttons[start + 7];
+            const button2 = buttons[end + 7];
             const x1 = button1.offsetLeft;
             const y1 = button1.offsetTop;
             const x2 = button2.offsetLeft;
