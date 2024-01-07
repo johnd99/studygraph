@@ -50,6 +50,7 @@ let ctx;
             ctx = canvas.getContext("2d");
             ctx.strokeStyle = 'white';
             drawLines();
+            loadEditorButtons();
         } else {
             console.error(`Error accessing data: ${response.status} ${response.statusText}`);
         }
@@ -76,57 +77,53 @@ function createButton(id, title) {
 }
 
 
+function loadEditorButtons() {
+    let positionButton = document.getElementById("changePosition");
+    positionButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        stateHandler(1);
+    });
+    let linesButton = document.getElementById("editLines");
+    linesButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        stateHandler(2);
+    });
+    let pageButton = document.getElementById("goToPage");
+    pageButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        stateHandler(3);
+    });
+    let createPageButton = document.getElementById("createPage");
+    createPageButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        createPage();
+    });
+    let saveButton = document.getElementById("saveGraph");
+    saveButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        updateGraph();
+        alert("Saved Successfully");
+    });
+    let exitButton = document.getElementById("exitProject");
+    exitButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        updateGraph();
+        window.location.href = `project-list.html`;
+    });
+    buttons[1] = positionButton;
+    buttons[2] = linesButton;
+    buttons[3] = pageButton;
+    buttons[4] = createPageButton;
+    buttons[5] = saveButton;
+    buttons[6] = exitButton;
+}
+
+
 document.addEventListener("click", (event) => {
     const x = event.pageX;
     const y = event.pageY;
     stateHandler(0, x, y);
 });
-
-
-//Might need to ensure that DOM is loaded first
-let positionButton = document.getElementById("changePosition");
-positionButton.addEventListener('click', (event) => {
-    event.stopPropagation();
-    stateHandler(1);
-});
-buttons[1] = positionButton;
-
-let linesButton = document.getElementById("editLines");
-linesButton.addEventListener('click', (event) => {
-    event.stopPropagation();
-    stateHandler(2);
-});
-buttons[2] = linesButton;
-
-let pageButton = document.getElementById("goToPage");
-pageButton.addEventListener('click', (event) => {
-    event.stopPropagation();
-    stateHandler(3);
-});
-buttons[3] = pageButton;
-
-let createPageButton = document.getElementById("createPage");
-createPageButton.addEventListener('click', (event) => {
-    event.stopPropagation();
-    createPage();
-});
-buttons[4] = createPageButton;
-
-let saveButton = document.getElementById("saveGraph");
-saveButton.addEventListener('click', (event) => {
-    event.stopPropagation();
-    updateGraph();
-    alert("Saved Successfully");
-});
-buttons[5] = saveButton;
-
-let exitButton = document.getElementById("exitProject");
-exitButton.addEventListener('click', (event) => {
-    event.stopPropagation();
-    updateGraph();
-    window.location.href = `project-list.html`;
-});
-buttons[6] = exitButton;
 
 
 async function updateGraph() {

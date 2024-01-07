@@ -1,4 +1,4 @@
-let buttons = {};
+let projectButtons = {};
 
 (async () => {
     try {
@@ -8,8 +8,9 @@ let buttons = {};
             for (let i = 0; i < data.length; i++) {
                 const id = data[i]['id'];
                 const name = data[i]['name'];
-                createButton(id, name);
+                createProjectButton(id, name);
             }
+            createOtherButtons();
         } else {
             console.error(`Error fetching projects: ${error}`)
         }
@@ -19,14 +20,25 @@ let buttons = {};
 })();
 
 
-function createButton(id, name) {
-    let button = document.createElement('button');
-    button.textContent = name;
-    //button.classList.add("graphButton");
-    button.addEventListener("click", (event) => {
+function createProjectButton(id, name) {
+    let projectButton = document.createElement('button');
+    projectButton.textContent = name;
+    projectButton.classList.add("projects-container");
+    projectButton.addEventListener("click", (event) => {
         event.stopPropagation(); // Prevent triggering the document click event
         window.location.href = `graph.html?graph_id=${encodeURIComponent(id)}`;
     });
-    document.body.appendChild(button);
-    buttons[id] = button;
+    document.body.appendChild(projectButton);
+    projectButtons[id] = projectButton;
 }
+
+
+function createOtherButtons() {
+    let button = document.createElement("button");
+    button.id = "rename-project";
+    button.className = "editor-button";
+    button.textContent = "Rename";
+    document.body.appendChild(button);
+}
+
+//Create state handler
