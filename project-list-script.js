@@ -56,19 +56,43 @@ function createOtherButtons() {
         //Finish this
     });
     document.body.appendChild(addButton);
+    let deleteButton = document.createElement("button");
+    deleteButton.id = "delete-project";
+    deleteButton.className = "editor-button";
+    deleteButton.textContent = "Delete Project";
+    deleteButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        stateHandler(0);
+        //Finish this
+    });
+    document.body.appendChild(deleteButton);
 }
 
 
 function stateHandler(newClick) {
     //renameProject(newClick);
     //addProject();
-    deleteProject();
+    deleteProject(newClick);
 }
 
 
-async function deleteProject() {
-    // Do this
-    
+async function deleteProject(id) {
+    const name = projectButtons[id].textContent;
+    const confirmed = confirm("Do you want to delete '" + name + "'?");
+    if (confirmed) {
+        try {
+            const response = await fetch('project-delete.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `id=${id}`
+            });
+            location.reload();
+        } catch (error) {
+            console.error(`Error deleting project: ${error}`);
+        }
+    }
 }
 
 
