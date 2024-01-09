@@ -73,6 +73,7 @@ document.getElementById('delete-page').addEventListener('click', async () => {
     }
 });
 
+
 document.getElementById('uploadImageButton').addEventListener('click', () => {
     document.getElementById('imageInput').click();
 });
