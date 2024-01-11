@@ -1,5 +1,5 @@
 
-let projectButtons = {};
+let buttons = {};
 let firstClick = -1;
 
 (async () => {
@@ -28,71 +28,97 @@ function createProjectButton(id, name) {
     projectButton.classList.add("projects-container");
     projectButton.addEventListener("click", (event) => {
         event.stopPropagation();
-        //window.location.href = `graph.html?graph_id=${encodeURIComponent(id)}`;
-        stateHandler(id);
+        stateHandler(id + 3);
     });
     document.body.appendChild(projectButton);
-    projectButtons[id] = projectButton;
+    buttons[id + 3] = projectButton;
 }
 
 
 function createOtherButtons() {
-    let renameButton = document.createElement("button");
-    renameButton.id = "rename-project";
-    renameButton.className = "editor-button";
-    renameButton.textContent = "Rename";
-    renameButton.addEventListener('click', (event) => {
-        event.stopPropagation();
-        //Finish this
-    });
-    document.body.appendChild(renameButton);
     let addButton = document.createElement("button");
     addButton.id = "add-project";
-    addButton.className = "editor-button";
+    addButton.classList.add("editor-button");
     addButton.textContent = "Add Project";
     addButton.addEventListener('click', (event) => {
         event.stopPropagation();
-        stateHandler(0);
-        //Finish this
+        stateHandler(1);
     });
-    document.body.appendChild(addButton);
+    let renameButton = document.createElement("button");
+    renameButton.id = "rename-project";
+    renameButton.classList.add("editor-button");
+    renameButton.textContent = "Rename";
+    renameButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        stateHandler(2);
+    });
     let deleteButton = document.createElement("button");
     deleteButton.id = "delete-project";
-    deleteButton.className = "editor-button";
+    deleteButton.classList.add("editor-button");
     deleteButton.textContent = "Delete Project";
     deleteButton.addEventListener('click', (event) => {
         event.stopPropagation();
-        stateHandler(0);
-        //Finish this
+        stateHandler(3);
     });
+    document.body.appendChild(addButton);
+    document.body.appendChild(renameButton);
     document.body.appendChild(deleteButton);
+    buttons[1] = addButton;
+    buttons[2] = renameButton;
+    buttons[3] = deleteButton;
 }
+
+
+document.addEventListener("click", (event) => {
+    stateHandler(0);
+});
 
 
 function stateHandler(newClick) {
-    //renameProject(newClick);
-    //addProject();
-    deleteProject(newClick);
+    if (newClick === 0 && firstClick !== -1) {
+        buttonActivate(false);
+    } else if (newClick === 1) {
+        if (firstClick !== -1) {
+            buttonActivate(false);
+        }
+        addProject();
+    } else if (newClick <= 3) {
+        if (firstClick === -1) {
+            buttonActivate(true, newClick);
+        } else if (firstClick !== newClick) {
+            buttonActivate(false);
+            buttonActivate(true, newClick);
+        }
+    } else if (newClick > 3) {
+        if (firstClick === -1) {
+            goToProject(newClick - 3);
+        } else if (firstClick === 2) {
+            renameProject(newClick - 3);
+            buttonActivate(false);
+        } else if (firstClick === 3) {
+            deleteProject(newClick - 3);
+            buttonActivate(false);
+        }
+    }
 }
 
 
-async function deleteProject(id) {
-    const name = projectButtons[id].textContent;
-    const confirmed = confirm("Do you want to delete '" + name + "'?");
-    if (confirmed) {
-        try {
-            const response = await fetch('project-delete.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: `id=${id}`
-            });
-            location.reload();
-        } catch (error) {
-            console.error(`Error deleting project: ${error}`);
-        }
+// Test this
+
+
+function buttonActivate(activate, newClick) {
+    if (activate) {
+        firstClick = newClick;
+        buttons[firstClick].classList.add("highlighted");
+    } else {
+        buttons[firstClick].classList.remove("highlighted");
+        firstClick = -1;
     }
+}
+
+
+function goToProject(id) {
+    window.location.href = `graph.html?graph_id=${encodeURIComponent(id)}`;
 }
 
 
@@ -117,10 +143,10 @@ async function addProject() {
 
 
 async function renameProject(id) {
-    const oldName = projectButtons[id].textContent;
+    const oldName = buttons[id + 3].textContent;
     const newName = prompt("Rename '" + oldName + "': ");
     if (newName !== null && newName !== "") {
-        projectButtons[id].textContent = newName;
+        buttons[id + 3].textContent = newName;
         try {
             const response = await fetch('project-rename.php', {
                 method: 'POST',
@@ -134,6 +160,26 @@ async function renameProject(id) {
             }
         } catch (error) {
             console.error(`Error renaming project: ${error}`);
+        }
+    }
+}
+
+
+async function deleteProject(id) {
+    const name = buttons[id + 3].textContent;
+    const confirmed = confirm("Do you want to delete '" + name + "'?");
+    if (confirmed) {
+        try {
+            const response = await fetch('project-delete.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `id=${id}`
+            });
+            location.reload();
+        } catch (error) {
+            console.error(`Error deleting project: ${error}`);
         }
     }
 }

@@ -22,3 +22,8 @@ body {
 .editor-button {
     margin-top: 6px;
 }
+
+.editor-button.highlighted {
+    background-color: blue;
+    color: white;
+}
