@@ -1,7 +1,7 @@
 
 
 body {
-    background-color: #202124;
+    background-color: #1b1b1e;
     color: #e8eaed;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -48,11 +48,11 @@ textarea {
 
 
 button, input[type="submit"] {
-    background-color: #3c4043;
+    background-color: #454e5b;
     color: #e8eaed;
     font-size: 1rem;
     padding: 0.5rem 1rem;
-    border: 1px solid #5f6368;
+    border: 1px solid #070707;
     border-radius: 4px;
     transition: background-color 0.3s ease;
 }

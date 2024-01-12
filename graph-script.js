@@ -127,15 +127,19 @@ document.addEventListener("click", (event) => {
 
 
 async function updateGraph() {
-    const response = await fetch("graph-update.php", {
-        method: "POST",
-        body: JSON.stringify({
-            "locations": locations,
-            "connections": connections
-        })
-    });
-    if (!response.ok) {
-        console.error("Error sending data:", response.status, response.statusText);
+    try {
+        const response = await fetch("graph-update.php", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "locations": locations,
+                "connections": connections
+            })
+        });
+    } catch (error) {
+        console.error(`Error updating graph: ${error}`);
     }
 }
 
@@ -234,20 +238,23 @@ function movePages(newClick, x, y) {
 
 
 async function createPage() {
-    const response = await fetch('page-create.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: `graph_id=${graph_id}`
-    });
-    if (response.ok) {
-        const page_id = await response.text();
-        goToPage(page_id);
-    } else {
-        console.error("Error creating page");
-    }
-    
+    try {
+        const response = await fetch('page-create.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `graph_id=${graph_id}`
+        });
+        if (response.ok) {
+            const page_id = await response.text();
+            goToPage(page_id);
+        } else {
+            console.error("Error creating page");
+        }
+    } catch (error) {
+        console.error(`Error creating page: ${error}`);
+    } 
 }
 
 

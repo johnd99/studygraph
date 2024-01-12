@@ -103,9 +103,6 @@ function stateHandler(newClick) {
 }
 
 
-// Test this
-
-
 function buttonActivate(activate, newClick) {
     if (activate) {
         firstClick = newClick;
@@ -155,9 +152,6 @@ async function renameProject(id) {
                 },
                 body: `id=${id}&name=${newName}`
             });
-            if (!response.ok) {
-                console.error(`Error renaming project: ${response.status} ${response.statusText}`);
-            }
         } catch (error) {
             console.error(`Error renaming project: ${error}`);
         }

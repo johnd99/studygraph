@@ -61,10 +61,13 @@ document.getElementById('delete-page').addEventListener('click', async () => {
     try {
         const response = await fetch('page-delete.php', {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
             body: `id=${page_id}`
         });
         if (response.ok) {
-            window.location.href = `graph.html`;
+            backToGraph();
         } else {
             console.error(`Error deleting page: ${response.status} ${response.statusText}`);
         }
@@ -92,5 +95,10 @@ document.getElementById('imageInput').addEventListener('change', (event) => {
 
 
 document.getElementById('back-to-graph').addEventListener('click', () => {
-    window.location.href = `graph.html?graph_id=${encodeURIComponent(graph_id)}`;
+    backToGraph();
 });
+
+
+function backToGraph() {
+    window.location.href = `graph.html?graph_id=${encodeURIComponent(graph_id)}`;
+}

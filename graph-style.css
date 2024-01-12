@@ -1,10 +1,7 @@
 
 body {
-    margin: 0;
-    padding: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensures that the body takes up at least the full viewport height */
     background-color: #1b1b1e;
     color: #e8eaed;
     font-family: Arial, sans-serif;
@@ -21,7 +18,7 @@ canvas {
     color: #e8eaed;
     font-size: 1rem;
     padding: 0.5rem 1rem;
-    border: 1px solid #5f6368;
+    border: 1px solid #070707;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
