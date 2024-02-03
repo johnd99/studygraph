@@ -12,7 +12,7 @@ let firstClick = -1;
                 const name = data[i]['name'];
                 createProjectButton(id, name);
             }
-            createOtherButtons();
+            loadOtherButtons();
         } else {
             console.error(`Error fetching projects: ${error}`)
         }
@@ -23,46 +23,34 @@ let firstClick = -1;
 
 
 function createProjectButton(id, name) {
-    let projectButton = document.createElement('button');
+    const projectButton = document.createElement('button');
     projectButton.textContent = name;
-    projectButton.classList.add("projects-container");
+    projectButton.classList.add("project-button");
     projectButton.addEventListener("click", (event) => {
         event.stopPropagation();
         stateHandler(id + 3);
     });
-    document.body.appendChild(projectButton);
+    document.querySelector('.projects-container').appendChild(projectButton);
     buttons[id + 3] = projectButton;
 }
 
 
-function createOtherButtons() {
-    let addButton = document.createElement("button");
-    addButton.id = "add-project";
-    addButton.classList.add("editor-button");
-    addButton.textContent = "Add Project";
+function loadOtherButtons() {
+    const addButton = document.querySelector('#add-project');
     addButton.addEventListener('click', (event) => {
         event.stopPropagation();
         stateHandler(1);
     });
-    let renameButton = document.createElement("button");
-    renameButton.id = "rename-project";
-    renameButton.classList.add("editor-button");
-    renameButton.textContent = "Rename";
+    const renameButton = document.querySelector('#rename-project')
     renameButton.addEventListener('click', (event) => {
         event.stopPropagation();
         stateHandler(2);
     });
-    let deleteButton = document.createElement("button");
-    deleteButton.id = "delete-project";
-    deleteButton.classList.add("editor-button");
-    deleteButton.textContent = "Delete Project";
+    const deleteButton = document.querySelector('#delete-project');
     deleteButton.addEventListener('click', (event) => {
         event.stopPropagation();
         stateHandler(3);
     });
-    document.body.appendChild(addButton);
-    document.body.appendChild(renameButton);
-    document.body.appendChild(deleteButton);
     buttons[1] = addButton;
     buttons[2] = renameButton;
     buttons[3] = deleteButton;
@@ -82,7 +70,7 @@ function stateHandler(newClick) {
             buttonActivate(false);
         }
         addProject();
-    } else if (newClick <= 3) {
+    } else if (newClick <= 3 && newClick !== 0) {
         if (firstClick === -1) {
             buttonActivate(true, newClick);
         } else if (firstClick !== newClick) {

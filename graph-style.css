@@ -40,20 +40,21 @@ canvas {
 
 
 .graphButton {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: #45496b;
-    color: #e8eaed;
-    font-size: 0.7rem;
-    padding: 0.4rem 1rem;
+    color: rgb(240, 240, 255);
+    font-size: 0.72rem;
+    padding: 0.6rem 0.6rem;
     border: 1px solid #d6d6d6;
     border-radius: 40px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     position: absolute;
-    transform: translate(-50%, -50%);
-    width: 90px; /* Add a fixed width */
+    width: 100px; /* Add a fixed width */
     white-space: normal; /* Allow the text to wrap */
     line-height: 1.2; /* Adjust line-height for better readability */
     text-align: center;
+    text-shadow: 1px 1px 0 rgb(50, 50, 50), -1px -1px 0 rgb(50, 50, 50);
 }
 
 .graphButton:hover {

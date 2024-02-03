@@ -1,5 +1,5 @@
 
-const defaultLocation = [675, 500];
+const defaultLocation = [40, 40];
 
 let graph_id;
 
@@ -61,11 +61,11 @@ let ctx;
 
 
 function createButton(id, title) {
-    let button = document.createElement('button');
+    const button = document.createElement('button');
     button.textContent = title;
     button.classList.add("graphButton");
-    let x = locations[id][0];
-    let y = locations[id][1];
+    const x = locations[id][0];
+    const y = locations[id][1];
     button.style.left = `${x}px`;
     button.style.top = `${y}px`;
     button.addEventListener("click", (event) => {
@@ -78,33 +78,33 @@ function createButton(id, title) {
 
 
 function loadEditorButtons() {
-    let positionButton = document.getElementById("changePosition");
+    const positionButton = document.getElementById("changePosition");
     positionButton.addEventListener('click', (event) => {
         event.stopPropagation();
         stateHandler(1);
     });
-    let linesButton = document.getElementById("editLines");
+    const linesButton = document.getElementById("editLines");
     linesButton.addEventListener('click', (event) => {
         event.stopPropagation();
         stateHandler(2);
     });
-    let pageButton = document.getElementById("goToPage");
+    const pageButton = document.getElementById("goToPage");
     pageButton.addEventListener('click', (event) => {
         event.stopPropagation();
         stateHandler(3);
     });
-    let createPageButton = document.getElementById("createPage");
+    const createPageButton = document.getElementById("createPage");
     createPageButton.addEventListener('click', (event) => {
         event.stopPropagation();
         createPage();
     });
-    let saveButton = document.getElementById("saveGraph");
+    const saveButton = document.getElementById("saveGraph");
     saveButton.addEventListener('click', (event) => {
         event.stopPropagation();
         updateGraph();
         alert("Saved Successfully");
     });
-    let exitButton = document.getElementById("exitProject");
+    const exitButton = document.getElementById("exitProject");
     exitButton.addEventListener('click', (event) => {
         event.stopPropagation();
         updateGraph();
@@ -230,10 +230,12 @@ function editConnections(id1, id2) {
 
 function movePages(newClick, x, y) {
     const button = buttons[newClick];
-    button.style.left = `${x}px`;
-    button.style.top = `${y}px`;
+    const x2 = x - (button.offsetWidth / 2);
+    const y2 = y - (button.offsetHeight / 2);
+    button.style.left = `${x2}px`;
+    button.style.top = `${y2}px`;
     drawLines();
-    locations[newClick - 7] = [x, y];
+    locations[newClick - 7] = [x2, y2];
 }
 
 
@@ -271,10 +273,10 @@ function drawLines() {
         for (let end of connections[start]) {
             const button1 = buttons[start + 7];
             const button2 = buttons[end + 7];
-            const x1 = button1.offsetLeft;
-            const y1 = button1.offsetTop;
-            const x2 = button2.offsetLeft;
-            const y2 = button2.offsetTop;
+            const x1 = button1.offsetLeft + (button1.offsetWidth / 2);
+            const y1 = button1.offsetTop + (button1.offsetHeight / 2);
+            const x2 = button2.offsetLeft + (button2.offsetWidth / 2);
+            const y2 = button2.offsetTop + (button2.offsetHeight / 2);
             ctx.beginPath();
             ctx.moveTo(x1, y1);
             ctx.lineTo(x2, y2);

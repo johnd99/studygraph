@@ -1,15 +1,26 @@
+
 body {
     background-color: #1b1b1e;
     color: #f1f1f2;
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 30px;
-    margin-left: 40px;
+    font-family: Helvetica, sans-serif;
+}
+
+h1 {
+    color: #dfdfdf;
+    text-align: center;
 }
 
 
 .projects-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+
+.project-button {
+    font-family: Helvetica, sans-serif;
     background: none;
     border: none;
     color: #e8eaed;
@@ -17,17 +28,24 @@ body {
     padding: 3px;
 }
 
-.projects-container:hover {
+
+.project-button:hover {
     color: #898e95;
 }
 
+
+.editor-buttons-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 .editor-button {
-    margin-top: 10px;
     margin-right: 6px;
     background-color: #454e5b;
     color: #e8eaed;
-    /*font-size: 1rem;*/
-    padding: 0.2rem 0.5rem;
+    font-size: 0.9rem;
+    padding: 0.3rem 0.8rem;
     border: 1px solid #080808;
     border-radius: 4px;
     cursor: pointer;

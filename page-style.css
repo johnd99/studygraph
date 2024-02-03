@@ -1,9 +1,8 @@
 
-
 body {
     background-color: #1b1b1e;
     color: #e8eaed;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 
@@ -17,6 +16,7 @@ body {
 }
 
 textarea {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #2b2e33;
     color: #e8eaed;
     border: 1px solid #5f6368;
@@ -25,16 +25,20 @@ textarea {
     resize: vertical;
     width: 100%;
     line-height: 1.5;
+    text-shadow: 1px 1px 0 rgb(50, 50, 50), -1px -1px 0 rgb(50, 50, 50);
 }
 
 #page-title {
+    font-family: 'Helvetica';
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
 }
 
 #page-body {
-    font-size: 1rem;
+    font-family: 'Segoe UI';
+    font-size: 17px;
+    height: 440px;
 }
 
 
@@ -43,7 +47,7 @@ textarea {
     max-height: 500px;
     object-fit: contain;
     display: block;
-    margin: 1rem auto;
+    /* margin: 0.4rem auto; */
 }
 
 
