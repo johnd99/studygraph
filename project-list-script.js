@@ -30,7 +30,7 @@ function createProjectButton(id, name) {
         event.stopPropagation();
         stateHandler(id + 3);
     });
-    document.querySelector('.projects-container').appendChild(projectButton);
+    document.getElementById('projects-container').appendChild(projectButton);
     buttons[id + 3] = projectButton;
 }
 

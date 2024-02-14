@@ -8,7 +8,7 @@ CREATE TABLE graph (
 CREATE TABLE page (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(50) DEFAULT '(unnamed)',
-    body VARCHAR(1000),
+    body VARCHAR(10000),
     image_reference VARCHAR(255),
     xPosition INTEGER,
     yPosition INTEGER,
